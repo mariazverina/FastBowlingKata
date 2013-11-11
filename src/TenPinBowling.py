@@ -51,7 +51,7 @@ class Frame(object):
 
     
     def isSpare(self):
-        return sum(self._rolls) == 10 and not self.isStrike()
+        return self.pinsBowled() == 10 and not self.isStrike()
 
     
     def isStrike(self):
@@ -65,6 +65,7 @@ class Frame(object):
     def twoRollScore(self):
         if self.isStrike():
             return 10 + self.next().firstRoll()
+        
         return self.pinsBowled()
 
     
@@ -79,7 +80,7 @@ class Frame(object):
     def totalScore(self, depth=999):
         score = self.score()
         depth -= 1
-        if self.next() and depth >0:
+        if self.next() and depth > 0:
             score += self.next().totalScore(depth)
         return score
 
