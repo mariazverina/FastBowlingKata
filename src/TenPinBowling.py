@@ -63,12 +63,12 @@ class Frame(object):
         return len(self._rolls) > 0 and self._rolls[0] == 10
 
     
-    def rawScore(self):
+    def pinsBowled(self):
         return sum(self._rolls)
 
     
     def twoRollScore(self):
-        return self.rawScore()
+        return self.pinsBowled()
 
     
     def firstRoll(self):
@@ -80,7 +80,7 @@ class Frame(object):
 
     
     def totalScore(self):
-        score = self.rawScore()
+        score = self.pinsBowled()
         if self.next():
             score += self.next().totalScore()
         return score
@@ -164,7 +164,7 @@ class Test(unittest.TestCase):
 
     def testFrameBaseScoreIsSumOfRolls(self):
         frame = Frame(3, 2)
-        self.assertEqual(5, frame.rawScore())
+        self.assertEqual(5, frame.pinsBowled())
     
     def testNormalFrameCanProvideTwoRollScore(self):
         frame = Frame(3, 5)
