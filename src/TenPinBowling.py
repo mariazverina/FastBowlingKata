@@ -53,6 +53,11 @@ class Test(unittest.TestCase):
         game = Game()
         game.rollMany([1, 2, 3, 4, 5])
         self.assertEqual(15, game.score())
+        
+    def testSpareByItself(self):
+        game = Game()
+        game.roll(2).roll(8)
+        self.assertEqual(10, game.score())
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
