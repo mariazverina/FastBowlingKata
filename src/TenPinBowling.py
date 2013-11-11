@@ -49,6 +49,10 @@ class Test(unittest.TestCase):
         game.rollMany([4] * 10)
         self.assertEqual(40, game.score())
         
+    def testFiveIncreasingRolls(self):
+        game = Game()
+        game.rollMany([1, 2, 3, 4, 5])
+        self.assertEqual(15, game.score())
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
