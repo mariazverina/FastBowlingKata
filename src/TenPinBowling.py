@@ -45,13 +45,12 @@ class Frame(object):
     
     def isSpare(self):
         return sum(self.rolls) == 10
-    
-    
-    
-    
-    
-    
 
+    
+    def isStrike(self):
+        return True
+    
+    
 
 
 class Test(unittest.TestCase):
@@ -112,6 +111,11 @@ class Test(unittest.TestCase):
         frame = Frame()
         frame.roll(3).roll(3)
         self.assertFalse(frame.isSpare())
+        
+    def testFrameIsAStrikeIfFirstRollsIs10(self):
+        frame = Frame()
+        frame.roll(10)
+        self.assertTrue(frame.isStrike())
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
