@@ -9,11 +9,11 @@ import unittest
 class Game(object):
     
     def __init__(self):
-        self.rolls = []
+        self._rolls = []
         self.frames = [Frame()]
     
     def roll(self, pins):
-        self.rolls.append(pins)
+        self._rolls.append(pins)
         if self.frames[-1].isClosed():
             self.frames.append(Frame())
         self.frames[-1].roll(pins)
@@ -21,8 +21,8 @@ class Game(object):
 
     
     def score(self):
-        if sum(self.rolls[-3:-1]) == 10:
-            return sum(self.rolls) + self.rolls[-1]
+        if sum(self._rolls[-3:-1]) == 10:
+            return sum(self._rolls) + self._rolls[-1]
         score = 0
         for frame in self.frames:
             score += frame.rawScore()
@@ -37,28 +37,28 @@ class Game(object):
 class Frame(object):
     def __init__(self):
         self._isClosed = False
-        self.rolls = []
+        self._rolls = []
     
     
     def roll(self, pinCount):
-        self.rolls.append(pinCount)
+        self._rolls.append(pinCount)
         return self
 
     
     def isClosed(self):
-        return self.isStrike() or len(self.rolls) >= 2
+        return self.isStrike() or len(self._rolls) >= 2
 
     
     def isSpare(self):
-        return sum(self.rolls) == 10
+        return sum(self._rolls) == 10
 
     
     def isStrike(self):
-        return len(self.rolls) > 0 and self.rolls[0] == 10
+        return len(self._rolls) > 0 and self._rolls[0] == 10
 
     
     def rawScore(self):
-        return sum(self.rolls)
+        return sum(self._rolls)
     
     
     
@@ -141,7 +141,7 @@ class Test(unittest.TestCase):
         frame = Frame()
         frame.roll(3).roll(2)
         self.assertEqual(5, frame.rawScore())
-        
+    
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
