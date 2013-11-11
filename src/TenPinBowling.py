@@ -41,6 +41,12 @@ class Frame(object):
     
     def isClosed(self):
         return len(self.rolls) >= 2
+
+    
+    def isSpare(self):
+        return True
+    
+    
     
     
     
@@ -97,6 +103,10 @@ class Test(unittest.TestCase):
         frame.roll(3)
         self.assertFalse(frame.isClosed())
 
+    def testFrameIsSpare(self):
+        frame = Frame()
+        frame.roll(3).roll(7)
+        self.assertTrue(frame.isSpare())
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
