@@ -10,7 +10,8 @@ class Game(object):
     
     def __init__(self):
         self._rolls = []
-        self.frames = [Frame()]
+        self._firstFrame = Frame()
+        self.frames = [self._firstFrame]
     
     def roll(self, pins):
         self._rolls.append(pins)
@@ -24,9 +25,8 @@ class Game(object):
         if sum(self._rolls[-3:-1]) == 10:
             return sum(self._rolls) + self._rolls[-1]
         frame = self.frames[0]
-        score = frame.totalScore()
         
-        return score
+        return frame.totalScore()
 
     
     def rollMany(self, rolls):
