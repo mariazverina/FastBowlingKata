@@ -10,9 +10,13 @@ class Game(object):
     
     def __init__(self):
         self.rolls = []
+        self.frames = [Frame()]
     
     def roll(self, pins):
         self.rolls.append(pins)
+        if self.frames[-1].isClosed():
+            self.frames.append(Frame())
+        self.frames[-1].roll(pins)
         return self
 
     
