@@ -48,8 +48,9 @@ class Frame(object):
     def roll(self, pinCount):
         if self.isClosed():
             self._next = Frame(pinCount)
-        else:
-            self._rolls.append(pinCount)
+            return self._next
+        
+        self._rolls.append(pinCount)
         return self
 
     
@@ -169,8 +170,8 @@ class Test(unittest.TestCase):
         
     def testRollOnClosedFrameWillCreateNewFrame(self):
         frame = Frame(3, 5)
-        frame.roll(5)
-        self.assertEquals(5, frame.next().firstRoll())
+        frame.roll(5).roll(2)
+        self.assertEquals(7, frame.next().twoRollScore())
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
