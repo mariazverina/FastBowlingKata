@@ -10,7 +10,7 @@ class Game(object):
     
     
     def roll(self, pins):
-        return pins
+        pass
 
     
     def score(self):
