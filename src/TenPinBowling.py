@@ -23,8 +23,10 @@ class Game(object):
     def score(self):
         if sum(self.rolls[-3:-1]) == 10:
             return sum(self.rolls) + self.rolls[-1]
-            
-        return sum(self.rolls)
+        score = 0
+        for frame in self.frames:
+            score += frame.rawScore()
+        return score
 
     
     def rollMany(self, rolls):
