@@ -9,15 +9,15 @@ import unittest
 class Game(object):
     
     def __init__(self):
-        self.lastScore = 0
+        self.rolls = []
     
     def roll(self, pins):
-        self.lastScore += pins
+        self.rolls.append(pins)
         return self
 
     
     def score(self):
-        return self.lastScore
+        return sum(self.rolls)
 
     
     def rollMany(self, rolls):
@@ -56,6 +56,8 @@ class Test(unittest.TestCase):
     def testSpareByItself(self):
         self.game.roll(2).roll(8)
         self.assertEqual(10, self.game.score())
+        
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
