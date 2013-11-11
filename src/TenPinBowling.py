@@ -23,9 +23,9 @@ class Game(object):
     def score(self):
         if sum(self._rolls[-3:-1]) == 10:
             return sum(self._rolls) + self._rolls[-1]
-        score = 0
-        for frame in self.frames:
-            score += frame.rawScore()
+        frame = self.frames[0]
+        score = frame.totalScore()
+        
         return score
 
     
