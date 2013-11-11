@@ -63,6 +63,8 @@ class Frame(object):
 
     
     def twoRollScore(self):
+        if self.isStrike():
+            return 10 + self.next().firstRoll()
         return self.pinsBowled()
 
     
@@ -218,6 +220,11 @@ class Test(unittest.TestCase):
         frame = Frame(10)
         frame.roll(5).roll(3)
         self.assertEquals(18, frame.score())
+    
+    def testStrikeCanGiveTwoRollScore(self):
+        frame = Frame(10)
+        frame.roll(3)
+        self.assertEquals(13, frame.twoRollScore())
         
         
 if __name__ == "__main__":
