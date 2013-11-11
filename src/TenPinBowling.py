@@ -80,6 +80,12 @@ class Frame(object):
     
     def next(self):
         return self._next
+
+    
+    def totalScore(self):
+        return self.rawScore() + self.next().rawScore()
+    
+    
     
     
     
@@ -172,6 +178,12 @@ class Test(unittest.TestCase):
         frame = Frame(3, 5)
         frame.roll(5).roll(2)
         self.assertEquals(7, frame.next().twoRollScore())
+    
+    def testFrameCanCalculateTotalScore(self):
+        frame = Frame(2,3)
+        frame.roll(4).roll(5)
+        self.assertEquals(14, frame.totalScore())
+        
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
