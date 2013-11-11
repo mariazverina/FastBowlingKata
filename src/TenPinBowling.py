@@ -38,13 +38,18 @@ class Frame(object):
     def __init__(self, first=None, second=None):
         self._rolls = []
         self._isClosed = False
+        self._next = None
+        
         if first != None:
             self.roll(first)
         if second != None:
             self.roll(second)
     
     def roll(self, pinCount):
-        self._rolls.append(pinCount)
+        if self.isClosed():
+            self._next = Frame(pinCount)
+        else:
+            self._rolls.append(pinCount)
         return self
 
     
@@ -73,7 +78,7 @@ class Frame(object):
 
     
     def next(self):
-        return Frame(5)
+        return self._next
     
     
     
