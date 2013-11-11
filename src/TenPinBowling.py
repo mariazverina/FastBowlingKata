@@ -30,7 +30,6 @@ class Game(object):
 class Frame(object):
     def __init__(self, first=None, second=None):
         self._rolls = []
-        self._isClosed = False
         self._next = None
         
         if first != None:
