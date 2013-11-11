@@ -9,19 +9,16 @@ import unittest
 class Game(object):
     
     def __init__(self):
-        self._rolls = []
         self._firstFrame = Frame()
         self._lastFrame = self._firstFrame
     
     def roll(self, pins):
-        self._rolls.append(pins)
         self._lastFrame = self._lastFrame.roll(pins)
         return self
 
     
     def score(self):
-        frame = self._firstFrame
-        return frame.totalScore()
+        return self._firstFrame.totalScore()
 
     
     def rollMany(self, rolls):
