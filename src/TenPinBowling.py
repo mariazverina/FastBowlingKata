@@ -29,14 +29,17 @@ class Game(object):
 
 
 class Frame(object):
+    def __init__(self):
+        self._isClosed = False
     
     
     def roll(self, pinCount):
+        self._isClosed = True
         return self
 
     
     def isClosed(self):
-        return True
+        return self._isClosed
     
     
     
@@ -82,6 +85,11 @@ class Test(unittest.TestCase):
         frame = Frame()
         frame.roll(5).roll(4)
         self.assertTrue(frame.isClosed())
+    
+    def testNewFrameIsOpen(self):
+        frame = Frame()
+        self.assertFalse(frame.isClosed())
+        
         
 
 
