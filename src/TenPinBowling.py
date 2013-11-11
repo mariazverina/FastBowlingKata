@@ -198,13 +198,13 @@ class Test(unittest.TestCase):
         frame.roll(1).roll(2).roll(3).roll(4)
         self.assertEquals(18, frame.totalScore())
         
-    def testStrikeFrameAddsNextPin(self):
+    def testSpareFrameAddsNextPin(self):
         frame = Frame(3, 7)
         frame.roll(8)
         self.assertEquals(18, frame.score())
         self.assertEquals(26, frame.totalScore())
 
-    def testStrikeScoreWithoutNextFrame(self):
+    def testSpareScoreWithoutNextFrame(self):
         frame = Frame(3, 7)
         self.assertEquals(10, frame.score())
         
