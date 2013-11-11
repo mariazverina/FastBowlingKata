@@ -51,7 +51,7 @@ class Frame(object):
 
     
     def isSpare(self):
-        return sum(self._rolls) == 10
+        return sum(self._rolls) == 10 and not self.isStrike()
 
     
     def isStrike(self):
@@ -85,6 +85,8 @@ class Frame(object):
         score = self.pinsBowled()
         if self.isSpare() and self.next():
             score += self.next().firstRoll()
+        if self.isStrike() and self.next():
+            score += self.next().twoRollScore()
             
         return score
     
@@ -211,6 +213,11 @@ class Test(unittest.TestCase):
     def testStrikeScoreIsTenByItself(self):
         frame = Frame(10)
         self.assertEquals(10, frame.score())
+        
+    def testStrikeScoreIsTenAddsNextRolls(self):
+        frame = Frame(10)
+        frame.roll(5).roll(3)
+        self.assertEquals(18, frame.score())
         
         
 if __name__ == "__main__":
