@@ -134,8 +134,9 @@ class Test(unittest.TestCase):
     def testFrameBaseScoreIsSumOfRolls(self):
         frame = Frame()
         frame.roll(3).roll(2)
-        score = frame.rawScore()
-        self.assertEqual(5, score)
+        self.assertEqual(5, frame.rawScore())
+        
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
     unittest.main()
