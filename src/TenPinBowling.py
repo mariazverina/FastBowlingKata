@@ -35,9 +35,14 @@ class Game(object):
 
 
 class Frame(object):
-    def __init__(self):
-        self._isClosed = False
+    def __init__(self, first=None, second=None):
         self._rolls = []
+        if first != None:
+            self._rolls.append(first)
+        if second != None:
+            self._rolls.append(second)
+        
+        self._isClosed = False
     
     
     def roll(self, pinCount):
@@ -139,8 +144,7 @@ class Test(unittest.TestCase):
         self.assertTrue(frame.isClosed())
 
     def testFrameBaseScoreIsSumOfRolls(self):
-        frame = Frame()
-        frame.roll(3).roll(2)
+        frame = Frame(3, 2)
         self.assertEqual(5, frame.rawScore())
     
         
