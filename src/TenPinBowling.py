@@ -18,12 +18,13 @@ class Game(object):
 
     
     def score(self):
-        return self._firstFrame.totalScore()
+        return self._firstFrame.totalScore(10)
 
     
     def rollMany(self, rolls):
         for roll in rolls:
             self.roll(roll)
+        return self
 
 
 class Frame(object):
@@ -227,6 +228,9 @@ class Test(unittest.TestCase):
         frame.roll(1).roll(2).roll(3).roll(4)
         self.assertEquals(11, frame.totalScore(2))
 
+    def testAllFiveGame(self):
+        game = Game().rollMany([5] * 22)
+        self.assertEquals(150, game.score())
         
         
 if __name__ == "__main__":
