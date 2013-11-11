@@ -14,9 +14,9 @@ class Game(object):
     
     def roll(self, pins):
         self._rolls.append(pins)
-        if self.frames[-1].isClosed():
-            self.frames.append(Frame())
         self.frames[-1].roll(pins)
+        if self.frames[-1].next() :
+            self.frames.append(self.frames[-1].next())
         return self
 
     
