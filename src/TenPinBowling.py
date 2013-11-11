@@ -18,11 +18,11 @@ class Game(object):
     
     def score(self):
         return self.lastScore
-    
-    
-    
-    
 
+    
+    def rollMany(self, rolls):
+        for roll in rolls:
+            self.roll(roll)
 
 
 class Test(unittest.TestCase):
@@ -43,6 +43,12 @@ class Test(unittest.TestCase):
         game = Game()
         game.roll(7).roll(5)
         self.assertEqual(12, game.score())
+        
+    def testManyRolls(self):
+        game = Game()
+        game.rollMany([4] * 10)
+        self.assertEqual(40, game.score())
+        
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
