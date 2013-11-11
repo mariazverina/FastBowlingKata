@@ -17,6 +17,9 @@ class Game(object):
 
     
     def score(self):
+        if sum(self.rolls[-3:-1]) == 10:
+            return sum(self.rolls) + self.rolls[-1]
+            
         return sum(self.rolls)
 
     
@@ -29,8 +32,6 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         self.game = Game()
-
-
 
     def testFirstRollScoreIsPinCount(self):
         self.game.roll(5)
@@ -56,6 +57,10 @@ class Test(unittest.TestCase):
     def testSpareByItself(self):
         self.game.roll(2).roll(8)
         self.assertEqual(10, self.game.score())
+        
+    def testSpareAddsNextRoll(self):
+        self.game.rollMany([1,9,3])
+        self.assertEqual(16, self.game.score())
         
 
 
