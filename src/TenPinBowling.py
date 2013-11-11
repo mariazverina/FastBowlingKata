@@ -49,6 +49,12 @@ class Frame(object):
     
     def isStrike(self):
         return len(self.rolls) > 0 and self.rolls[0] == 10
+
+    
+    def rawScore(self):
+        return sum(self.rolls)
+    
+    
     
     
 
@@ -125,6 +131,11 @@ class Test(unittest.TestCase):
         frame = Frame().roll(10)
         self.assertTrue(frame.isClosed())
 
+    def testFrameBaseScoreIsSumOfRolls(self):
+        frame = Frame()
+        frame.roll(3).roll(2)
+        score = frame.rawScore()
+        self.assertEqual(5, score)
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
     unittest.main()
