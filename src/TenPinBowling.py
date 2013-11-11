@@ -76,10 +76,11 @@ class Frame(object):
         return self._next
 
     
-    def totalScore(self):
+    def totalScore(self, depth=999):
         score = self.score()
-        if self.next():
-            score += self.next().totalScore()
+        depth -= 1
+        if self.next() and depth >0:
+            score += self.next().totalScore(depth)
         return score
 
     
@@ -89,18 +90,8 @@ class Frame(object):
             score += self.next().firstRoll()
         if self.isStrike() and self.next():
             score += self.next().twoRollScore()
-            
         return score
     
-    
-    
-    
-    
-    
-    
-    
-    
-
 
 class Test(unittest.TestCase):
 
@@ -230,6 +221,12 @@ class Test(unittest.TestCase):
         frame = Frame(10)
         frame.roll(5)
         self.assertEquals(15, frame.score())
+    
+    def testFrameScoreLimit(self):
+        frame = Frame(3, 5)
+        frame.roll(1).roll(2).roll(3).roll(4)
+        self.assertEquals(11, frame.totalScore(2))
+
         
         
 if __name__ == "__main__":
