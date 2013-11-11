@@ -31,7 +31,7 @@ class Game(object):
 class Frame(object):
     
     
-    def roll(self, param1):
+    def roll(self, pinCount):
         return self
 
     
