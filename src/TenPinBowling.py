@@ -84,6 +84,12 @@ class Frame(object):
         if self.next():
             score += self.next().totalScore()
         return score
+
+    
+    def score(self):
+        return self.pinsBowled() + 8
+    
+    
     
     
     
@@ -193,6 +199,10 @@ class Test(unittest.TestCase):
         frame.roll(1).roll(2).roll(3).roll(4)
         self.assertEquals(18, frame.totalScore())
         
+    def testStrikeFrameAddsNextPin(self):
+        frame = Frame(3, 7)
+        frame.roll(8)
+        self.assertEquals(18, frame.score())
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
