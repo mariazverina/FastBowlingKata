@@ -20,8 +20,6 @@ class Game(object):
 
     
     def score(self):
-        if sum(self._rolls[-3:-1]) == 10:
-            return sum(self._rolls) + self._rolls[-1]
         frame = self._firstFrame
         return frame.totalScore()
 
