@@ -48,7 +48,7 @@ class Frame(object):
 
     
     def isStrike(self):
-        return True
+        return len(self.rolls) > 0 and self.rolls[0] == 10
     
     
 
@@ -116,6 +116,11 @@ class Test(unittest.TestCase):
         frame = Frame()
         frame.roll(10)
         self.assertTrue(frame.isStrike())
+        
+    def testSpareIsNotStrike(self):
+        frame = Frame().roll(4).roll(6)
+        self.assertFalse(frame.isStrike())
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
