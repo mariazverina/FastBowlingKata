@@ -225,6 +225,11 @@ class Test(unittest.TestCase):
         frame = Frame(10)
         frame.roll(3)
         self.assertEquals(13, frame.twoRollScore())
+
+    def testStrikeScoreAddsNextRollIfOnlyOneAvailable(self):
+        frame = Frame(10)
+        frame.roll(5)
+        self.assertEquals(15, frame.score())
         
         
 if __name__ == "__main__":
