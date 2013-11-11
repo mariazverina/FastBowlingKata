@@ -28,6 +28,22 @@ class Game(object):
             self.roll(roll)
 
 
+class Frame(object):
+    
+    
+    def roll(self, param1):
+        return self
+
+    
+    def isClosed(self):
+        return True
+    
+    
+    
+    
+
+
+
 class Test(unittest.TestCase):
 
     def setUp(self):
@@ -61,6 +77,11 @@ class Test(unittest.TestCase):
     def testSpareAddsNextRoll(self):
         self.game.rollMany([1,9,3])
         self.assertEqual(16, self.game.score())
+    
+    def testFrameIsClosedAfterTwoRolls(self):
+        frame = Frame()
+        frame.roll(5).roll(4)
+        self.assertTrue(frame.isClosed())
         
 
 
