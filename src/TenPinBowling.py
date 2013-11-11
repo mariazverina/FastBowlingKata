@@ -208,6 +208,11 @@ class Test(unittest.TestCase):
         frame = Frame(3, 7)
         self.assertEquals(10, frame.score())
         
+    def testStrikeScoreIsTenByItself(self):
+        frame = Frame(10)
+        self.assertEquals(10, frame.score())
+        
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
     unittest.main()
