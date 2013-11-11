@@ -37,13 +37,11 @@ class Game(object):
 class Frame(object):
     def __init__(self, first=None, second=None):
         self._rolls = []
-        if first != None:
-            self._rolls.append(first)
-        if second != None:
-            self._rolls.append(second)
-        
         self._isClosed = False
-    
+        if first != None:
+            self.roll(first)
+        if second != None:
+            self.roll(second)
     
     def roll(self, pinCount):
         self._rolls.append(pinCount)
@@ -106,8 +104,7 @@ class Test(unittest.TestCase):
         self.assertEqual(16, self.game.score())
     
     def testFrameIsClosedAfterTwoRolls(self):
-        frame = Frame()
-        frame.roll(5).roll(4)
+        frame = Frame(5, 4)
         self.assertTrue(frame.isClosed())
     
     def testNewFrameIsOpen(self):
@@ -121,13 +118,11 @@ class Test(unittest.TestCase):
         self.assertFalse(frame.isClosed())
 
     def testFrameIsSpareIfRollsSumUpTo10(self):
-        frame = Frame()
-        frame.roll(3).roll(7)
+        frame = Frame(3, 7)
         self.assertTrue(frame.isSpare())
 
     def testFrameIsNotSpareWhenLessThan10(self):
-        frame = Frame()
-        frame.roll(3).roll(3)
+        frame = Frame(3, 3)
         self.assertFalse(frame.isSpare())
         
     def testFrameIsAStrikeIfFirstRollsIs10(self):
@@ -136,11 +131,11 @@ class Test(unittest.TestCase):
         self.assertTrue(frame.isStrike())
         
     def testSpareIsNotStrike(self):
-        frame = Frame().roll(4).roll(6)
+        frame = Frame(4,6)
         self.assertFalse(frame.isStrike())
 
     def testStrikeFrameIsClosedAfterFirstRoll(self):
-        frame = Frame().roll(10)
+        frame = Frame(10)
         self.assertTrue(frame.isClosed())
 
     def testFrameBaseScoreIsSumOfRolls(self):
@@ -149,9 +144,10 @@ class Test(unittest.TestCase):
     
         
     def testNormalFrameCanProvideTwoRollScore(self):
-        frame = Frame()
-        frame.roll(3).roll(5)
+        frame = Frame(3, 5)
         self.assertEquals(8, frame.twoRollScore())
+        
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
     unittest.main()
