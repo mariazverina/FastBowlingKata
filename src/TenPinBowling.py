@@ -11,20 +11,18 @@ class Game(object):
     def __init__(self):
         self._rolls = []
         self._firstFrame = Frame()
-        self.frames = [self._firstFrame]
+        self._lastFrame = self._firstFrame
     
     def roll(self, pins):
         self._rolls.append(pins)
-        self.frames[-1].roll(pins)
-        if self.frames[-1].next() :
-            self.frames.append(self.frames[-1].next())
+        self._lastFrame = self._lastFrame.roll(pins)
         return self
 
     
     def score(self):
         if sum(self._rolls[-3:-1]) == 10:
             return sum(self._rolls) + self._rolls[-1]
-        frame = self.frames[0]
+        frame = self._firstFrame
         
         return frame.totalScore()
 
