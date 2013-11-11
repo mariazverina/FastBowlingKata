@@ -10,11 +10,11 @@ class Game(object):
     
     
     def roll(self, pins):
-        pass
+        self.lastScore = pins
 
     
     def score(self):
-        return 5
+        return self.lastScore
     
     
     
@@ -25,12 +25,16 @@ class Game(object):
 class Test(unittest.TestCase):
 
 
-    def testFirstRolScoreIsPinCount(self):
+    def testFirstRollScoreIsPinCount(self):
         game = Game()
         game.roll(5)
         self.assertEqual(5, game.score())
-        pass
+        
 
+    def testFirstRollScoreWithDifferentCount(self):
+        game = Game()
+        game.roll(7)
+        self.assertEqual(7, game.score())
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
