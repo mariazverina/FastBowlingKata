@@ -80,7 +80,7 @@ class Frame(object):
 
     
     def totalScore(self):
-        score = self.pinsBowled()
+        score = self.score()
         if self.next():
             score += self.next().totalScore()
         return score
@@ -88,7 +88,7 @@ class Frame(object):
     
     def score(self):
         score = self.pinsBowled()
-        if self.next():
+        if self.isSpare() and self.next():
             score += self.next().firstRoll()
             
         return score
@@ -207,6 +207,7 @@ class Test(unittest.TestCase):
         frame = Frame(3, 7)
         frame.roll(8)
         self.assertEquals(18, frame.score())
+        self.assertEquals(26, frame.totalScore())
 
     def testStrikeScoreWithoutNextFrame(self):
         frame = Frame(3, 7)
