@@ -77,10 +77,10 @@ class Frame(object):
         return self._next
 
     
-    def totalScore(self, depth=999):
+    def totalScore(self, depth=-1):
         score = self.score()
         depth -= 1
-        if self.next() and depth > 0:
+        if self.next() and depth != 0:
             score += self.next().totalScore(depth)
         return score
 
