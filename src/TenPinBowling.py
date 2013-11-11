@@ -70,6 +70,12 @@ class Frame(object):
     
     def firstRoll(self):
         return self._rolls[0]
+
+    
+    def next(self):
+        return Frame(5)
+    
+    
     
     
     
@@ -155,6 +161,11 @@ class Test(unittest.TestCase):
     def testNormalFrameCanProvideFirstRoll(self):
         frame = Frame(3, 5)
         self.assertEquals(3, frame.firstRoll())
+        
+    def testRollOnClosedFrameWillCreateNewFrame(self):
+        frame = Frame(3, 5)
+        frame.roll(5)
+        self.assertEquals(5, frame.next().firstRoll())
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testFirstRolScoreIsPinCount']
