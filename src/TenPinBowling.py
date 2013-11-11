@@ -87,7 +87,7 @@ class Frame(object):
 
     
     def score(self):
-        return self.pinsBowled() + 8
+        return self.pinsBowled() + self.next().firstRoll()
     
     
     
