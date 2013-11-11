@@ -31,15 +31,16 @@ class Game(object):
 class Frame(object):
     def __init__(self):
         self._isClosed = False
+        self.rolls = []
     
     
     def roll(self, pinCount):
-        self._isClosed = True
+        self.rolls.append(pinCount)
         return self
 
     
     def isClosed(self):
-        return self._isClosed
+        return len(self.rolls) >= 2
     
     
     
@@ -91,6 +92,10 @@ class Test(unittest.TestCase):
         self.assertFalse(frame.isClosed())
         
         
+    def testFrameStaysOpenIfFirstRollsIsNotTen(self):
+        frame = Frame()
+        frame.roll(3)
+        self.assertFalse(frame.isClosed())
 
 
 if __name__ == "__main__":
